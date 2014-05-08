@@ -31,23 +31,23 @@
 
 <script>
   $(document).ready(function(){
+
     $('.hit-type').on('click', function() {
       $('#hidden-hit_type_id').val($(this).data('hit-type-id'));
     });
 
-
-      $('#spray-chart').on('dblclick', function(e) {
-        if ($('#hidden-hit_type_id').val() != '') {
-          parentOffset = $(this).parent().offset();
-          relX = parseInt(e.pageX - parentOffset.left) - 15;
-          relY = parseInt(e.pageY - parentOffset.top);
-          $('#hidden-hit-coords').val(relX + ',' + relY);
-          $('#new_hit').submit();
-          $('#hidden-hit_type_id').val('')
-        } else {
-          alert('select a hit type first!')
-        }
-      });
+    $('#spray-chart').on('dblclick', function(e) {
+      if ($('#hidden-hit_type_id').val() != '') {
+        parentOffset = $(this).parent().offset();
+        relX = parseInt(e.pageX - parentOffset.left) - 15;
+        relY = parseInt(e.pageY - parentOffset.top);
+        $('#hidden-hit-coords').val(relX + ',' + relY);
+        $('#new_hit').submit();
+        $('#hidden-hit_type_id').val('')
+      } else {
+        alert('select a hit type first!')
+      }
+    });
 
   })
 </script>
