@@ -1,0 +1,18 @@
+<%= form_for(@player) do |f| %>
+  <div class="row">
+    <div class="columns">
+      <%= f.text_field :name, placeholder: 'Name' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns">
+      <%= f.file_field :photo %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns">
+      <button class="button">Submit</button>
+    </div>
+  </div>
+
+<% end %>
