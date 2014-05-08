@@ -47,6 +47,10 @@ li {list-style-position: inside;}
       border-radius: 3px;
       color: white;
       cursor: pointer;
+
+      &:hover {
+        opacity: .7;
+      }
     }
   }
 }

@@ -35,14 +35,19 @@
       $('#hidden-hit_type_id').val($(this).data('hit-type-id'));
     });
 
-    if ($('#hidden-hit_type_id').val() != null) {
+
       $('#spray-chart').on('dblclick', function(e) {
-        parentOffset = $(this).parent().offset();
-        relX = parseInt(e.pageX - parentOffset.left) - 15;
-        relY = parseInt(e.pageY - parentOffset.top);
-        $('#hidden-hit-coords').val(relX + ',' + relY);
-        $('#new_hit').submit();
+        if ($('#hidden-hit_type_id').val() != '') {
+          parentOffset = $(this).parent().offset();
+          relX = parseInt(e.pageX - parentOffset.left) - 15;
+          relY = parseInt(e.pageY - parentOffset.top);
+          $('#hidden-hit-coords').val(relX + ',' + relY);
+          $('#new_hit').submit();
+          $('#hidden-hit_type_id').val('')
+        } else {
+          alert('select a hit type first!')
+        }
       });
-    }
+
   })
 </script>
