@@ -18,6 +18,39 @@ li {list-style-position: inside;}
 
 .clear {clear:both}
 
+.out {background-color: gray;}
+.single {background-color: red;}
+.double {background-color: blue;}
+.triple {background-color: purple;}
+.homerun {background-color: black;}
+
+#legend {
+  margin: 10px;
+  padding: 10px;
+  border:1px solid black;
+  position: absolute;
+  z-index: 99;
+
+  h4 {
+    font-size:16px;
+  }
+
+  ul {
+    width: 160px;
+    font-size:12px;
+
+    li {
+      list-style: none;
+      display:inline-block;
+      padding:3px 7px;
+      margin: 4px 2px;
+      border-radius: 3px;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
+
 #spray-chart {
   width:600px;
   height:600px;
@@ -37,12 +70,9 @@ li {list-style-position: inside;}
   width:6px;
   height:6px;
   border-radius: 50%;
-  background-color: red;
-  border: 1px solid white;
-  z-index: 99;
 
   &:hover {
-    border: 1px solid black;
+    border: 1px solid white;
     /*background-color: white !important;*/
   }
 }

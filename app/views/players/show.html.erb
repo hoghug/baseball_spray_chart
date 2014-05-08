@@ -8,13 +8,22 @@
 </div>
 <div class="row">
   <div class="large-12 columns">
+    <div id="legend">
+      <h4>Legend</h4>
+      <ul>
+        <% @hit_types.each do |hit_type| %>
+          <li class="hit-type <%= hit_type.name %>" data-hit-type-id="<%= hit_type.id %>"><%= hit_type.name %></li>
+        <% end %>
+      </ul>
+    </div>
     <div id="spray-chart">
       <% @hits.each do |hit| %>
-        <%= link_to '', player_hit_path(@player, hit), method: 'delete', remote: true, class: 'hit-circle', style: "top: #{hit.coords.split(',')[1]}px; left: #{hit.coords.split(',')[0]}px", id: "#{hit.id}" %>
+        <%= link_to '', player_hit_path(@player, hit), method: 'delete', remote: true, class: "hit-circle #{hit.hit_type.name}", style: "top: #{hit.coords.split(',')[1]}px; left: #{hit.coords.split(',')[0]}px", id: "#{hit.id}" %>
       <% end %>
     </div>
     <%= form_for [@player, @hit], remote: true do |f| %>
       <%= f.hidden_field :coords, id: 'hidden-hit-coords' %>
+      <%= f.hidden_field :hit_type_id, id: 'hidden-hit_type_id' %>
     <% end %>
   </div>
 </div>
@@ -22,16 +31,18 @@
 
 <script>
   $(document).ready(function(){
-
-    $('#spray-chart').on('dblclick', function(e) {
-      var parentOffset = $(this).parent().offset();
-      var relX = parseInt(e.pageX - parentOffset.left) - 15;
-      var relY = parseInt(e.pageY - parentOffset.top);
-
-      $(this).append('<div class="hit-circle" style="top:' + relY + 'px; left:' + relX + 'px; "></div>');
-
-      $('#hidden-hit-coords').val(relX + ',' + relY);
-      $('#new_hit').submit();
+    $('.hit-type').on('click', function() {
+      $('#hidden-hit_type_id').val($(this).data('hit-type-id'));
     });
+
+    if ($('#hidden-hit_type_id').val() != null) {
+      $('#spray-chart').on('dblclick', function(e) {
+        parentOffset = $(this).parent().offset();
+        relX = parseInt(e.pageX - parentOffset.left) - 15;
+        relY = parseInt(e.pageY - parentOffset.top);
+        $('#hidden-hit-coords').val(relX + ',' + relY);
+        $('#new_hit').submit();
+      });
+    }
   })
 </script>

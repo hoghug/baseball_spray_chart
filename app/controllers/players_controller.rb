@@ -6,6 +6,7 @@ class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
     @hit = Hit.new
+    @hit_types = HitType.all
     @hits = @player.hits
   end
 
