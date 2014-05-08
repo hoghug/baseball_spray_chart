@@ -1,0 +1,49 @@
+html, body, div, img, span, h1, h2, h3, h4, p, ol, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+
+* {
+  font-weight: normal !important;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+li {list-style-position: inside;}
+
+.clear {clear:both}
+
+#spray-chart {
+  width:600px;
+  height:600px;
+  position: relative;
+  cursor: pointer;
+
+  background-image: url(ballpark_bg.gif);
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.hit-circle {
+  position: absolute;
+  width:6px;
+  height:6px;
+  border-radius: 50%;
+  background-color: red;
+  border: 1px solid white;
+  z-index: 99;
+
+  &:hover {
+    border: 1px solid black;
+    /*background-color: white !important;*/
+  }
+}
+

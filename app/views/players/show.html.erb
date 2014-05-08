@@ -1,22 +1,21 @@
 <div class="row">
   <div class="large-2 columns">
-    <h1><%= @player.name %></h1>
-    <div id="xycoordinates"></div>
-  </div>
-  <div class="large-2 columns">
     <%= image_tag @player.photo.url(:thumb) %>
   </div>
-  <div class="large-8 columns">
+  <div class="large-4 end columns">
+    <h1><%= @player.name %></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
     <div id="spray-chart">
       <% @hits.each do |hit| %>
-        <div class="hit-circle" style="top:<%= hit.coords.split(',')[1] %>px; left: <%= hit.coords.split(',')[0] %>px"></div>
+        <%= link_to '', player_hit_path(@player, hit), method: 'delete', remote: true, class: 'hit-circle', style: "top: #{hit.coords.split(',')[1]}px; left: #{hit.coords.split(',')[0]}px", id: "#{hit.id}" %>
       <% end %>
     </div>
-
     <%= form_for [@player, @hit], remote: true do |f| %>
       <%= f.hidden_field :coords, id: 'hidden-hit-coords' %>
     <% end %>
-
   </div>
 </div>
 
@@ -24,9 +23,8 @@
 <script>
   $(document).ready(function(){
 
-    $('#spray-chart').on('click', function(e) {
+    $('#spray-chart').on('dblclick', function(e) {
       var parentOffset = $(this).parent().offset();
-      //or $(this).offset(); if you really just want the current element's offset
       var relX = parseInt(e.pageX - parentOffset.left) - 15;
       var relY = parseInt(e.pageY - parentOffset.top);
 
@@ -34,6 +32,6 @@
 
       $('#hidden-hit-coords').val(relX + ',' + relY);
       $('#new_hit').submit();
-    })
+    });
   })
 </script>
