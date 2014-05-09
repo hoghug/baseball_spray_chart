@@ -40,7 +40,7 @@ function setMarkers(map, locations) {
       infowindow.setContent(this.title);
       infowindow.open(map, this);
       map.setCenter(marker.getPosition());
-      map.setZoom(14);
+      map.setZoom(10);
     });
 
   }
