@@ -22,12 +22,20 @@ li {list-style-position: inside;}
 .lineup-spot {
   list-style-type: none;
   color: gray;
+  width: 50%;
   margin: 0 0 3px 0;
   padding: 2px 6px;
-  border-bottom: 1px solid gray;
+  background-color: gray;
+  border: 1px solid white;
+  border-radius: 4px;
 
   span {
-    color: black;
+    font-size:0.8em;
+    color: white;
+  }
+
+  &:hover {
+    opacity: 0.7;
   }
 }
 
@@ -35,7 +43,6 @@ li {list-style-position: inside;}
   list-style-type: none;
   font-weight: bold !important;
 }
-
 
 
 
@@ -100,7 +107,6 @@ li {list-style-position: inside;}
 
   &:hover {
     border: 1px solid white;
-    /*background-color: white !important;*/
   }
 }
 

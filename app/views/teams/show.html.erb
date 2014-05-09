@@ -18,30 +18,33 @@
     <%= link_to 'Add Player', new_team_player_path(@team) %>
   </div>
 
-  <div class="large-4 columns end" id="lineup">
+  <div class="large-4 columns" id="lineup">
 
     <ul id="sortable-lineup" class="connectedSortable">
-    <li class="ui-state-disabled header">Lineup</li>
-    <% (1..9).each do |spot| %>
-      <li class="lineup-spot">
-        <% if @lineup[spot - 1] != nil %>
-          <span data-player-id="<%= Player.find(@lineup[spot - 1]).id %>"><%= Player.find(@lineup[spot - 1]).name %></span>
-        <% end %>
-      </li>
-    <% end %>
-    </ul>
-
-    <ul id="sortable-bench" class="connectedSortable">
-    <li class="ui-state-disabled header">Bench</li>
-    <% @bench_players.each do |player| %>
-      <li class="lineup-spot"><span data-player-id="<%= player.id %>"><%= player.name %></span></li>
-    <% end %>
+      <li class="ui-state-disabled header">Lineup</li>
+      <% (1..9).each do |spot| %>
+        <li class="lineup-spot">
+          <% if @lineup[spot - 1] != nil %>
+            <span data-player-id="<%= Player.find(@lineup[spot - 1]).id %>"><%= Player.find(@lineup[spot - 1]).name %></span>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
+
+  <div class="large-4 columns">
+    <ul id="sortable-bench" class="connectedSortable">
+      <li class="ui-state-disabled header">Bench</li>
+      <% @bench_players.each do |player| %>
+        <li class="lineup-spot"><span data-player-id="<%= player.id %>"><%= player.name %></span></li>
+      <% end %>
+    </ul>
+  </div>
+
 </div>
 
 <%= form_for [@team], remote: true do |f| %>
-  <%= f.text_field :lineup, id: 'hidden-lineup' %>
+  <%= f.hidden_field :lineup, id: 'hidden-lineup' %>
 <% end %>
 
 
