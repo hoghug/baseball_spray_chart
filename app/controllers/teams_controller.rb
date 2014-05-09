@@ -24,10 +24,20 @@ class TeamsController < ApplicationController
     end
   end
 
+  def update
+    @team = Team.find(params[:id])
+
+    if @team.update(team_params)
+      respond_to do |format|
+        format.html { redirect_to :back }
+      end
+    end
+
+  end
 
 private
   def team_params
-    params.require(:team).permit(:name, :address, :logo, :stadium_chart)
+    params.require(:team).permit(:name, :address, :logo, :stadium_chart, :lineup)
   end
 
 end

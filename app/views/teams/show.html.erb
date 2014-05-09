@@ -21,11 +21,11 @@
   <div class="large-4 columns end" id="lineup">
 
     <ul id="sortable-lineup" class="connectedSortable">
-    <!-- <li class="ui-state-disabled header">Lineup</li> -->
+    <li class="ui-state-disabled header">Lineup</li>
     <% (1..9).each do |spot| %>
       <li class="lineup-spot">
         <% if @lineup[spot - 1] != nil %>
-          <%= Player.find(@lineup[spot - 1]).name %>
+          <span data-player-id="<%= Player.find(@lineup[spot - 1]).id %>"><%= Player.find(@lineup[spot - 1]).name %></span>
         <% end %>
       </li>
     <% end %>
@@ -34,12 +34,16 @@
     <ul id="sortable-bench" class="connectedSortable">
     <li class="ui-state-disabled header">Bench</li>
     <% @bench_players.each do |player| %>
-      <li class="lineup-spot"><%= player.name %></li>
+      <li class="lineup-spot"><span data-player-id="<%= player.id %>"><%= player.name %></span></li>
     <% end %>
     </ul>
   </div>
-
 </div>
+
+<%= form_for [@team], remote: true do |f| %>
+  <%= f.text_field :lineup, id: 'hidden-lineup' %>
+<% end %>
+
 
 
 
@@ -57,6 +61,14 @@
         } else if ($('#sortable-lineup .lineup-spot').length < 9) {
           $('#sortable-bench .lineup-spot').first().appendTo('#sortable-lineup');
         }
+
+        battingLineup = [];
+        $('#sortable-lineup .lineup-spot').each(function(index, value) {
+          battingLineup.push($(this).find('span').data('player-id'));
+        });
+
+        $('#hidden-lineup').val('{' + battingLineup.join(',') + '}')
+        $('.edit_team').submit();
       }
     });
 
