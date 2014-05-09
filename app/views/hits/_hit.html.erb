@@ -1,1 +1,1 @@
-<%= link_to '', player_hit_path(@player, @hit), method: 'delete', remote: true, class: "hit-circle #{hit.hit_type.name}", style: "top: #{hit.coords.split(',')[1]}px; left: #{hit.coords.split(',')[0]}px", id: "#{hit.id}" %>
+<%= link_to '', team_player_hit_path(@team, @player, @hit), method: 'delete', remote: true, class: "hit-circle #{hit.hit_type.name}", style: "top: #{hit.coords.split(',')[1]}px; left: #{hit.coords.split(',')[0]}px", id: "#{hit.id}" %>

@@ -9,6 +9,8 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 gem 'paperclip', :github => 'thoughtbot/paperclip'
 gem 'foundation-rails'
+gem 'geocoder'
+
 
 group :development do
   gem 'better_errors'

@@ -1,0 +1,7 @@
+<%= form_for(@team) do |f| %>
+  <%= f.text_field :name, placeholder: 'Team Name' %>
+  <%= f.text_field :address, placeholder: 'Stadium Address' %>
+  <%= f.file_field :logo %>
+  <%= f.file_field :stadium_chart %>
+  <button class="button">Submit</button>
+<% end %>

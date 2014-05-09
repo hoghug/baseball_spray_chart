@@ -18,6 +18,28 @@ li {list-style-position: inside;}
 
 .clear {clear:both}
 
+
+.lineup-spot {
+  color: gray;
+  margin: 0 0 4px 0;
+  padding: 3px 8px;
+  border-bottom: 1px solid gray;
+
+  span {
+    color: black;
+  }
+}
+
+.header {
+  list-style-type: none;
+  font-weight: bold
+}
+
+
+
+
+/* SPRAY CHART */
+
 .out {background-color: gray;}
 .single {background-color: red;}
 .double {background-color: blue;}

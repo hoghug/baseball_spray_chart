@@ -1,9 +1,11 @@
 class HitsController < ApplicationController
+
   def create
+    @team = Team.find(params[:team_id])
     @player = Player.find(params[:player_id])
     @hit = @player.hits.create(hit_params)
     respond_to do |format|
-      format.html { redirect_to player_path(@player) }
+      format.html { redirect_to team_player_path(@team, @player) }
       format.js
     end
   end
@@ -14,7 +16,7 @@ class HitsController < ApplicationController
     @hit.destroy
 
     respond_to do |format|
-      format.html { redirect_to player_path(@player) }
+      format.html { redirect_to team_player_path(@team, @player) }
       format.js
     end
 

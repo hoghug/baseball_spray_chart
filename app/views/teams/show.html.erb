@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="large-6 columns">
+  <%= image_tag @team.logo.url(:thumb) %>
+  <h1><%= @team.name %></h1>
+  <h4 class="subheader"><%= @team.address %></h4>
+  </div>
+  <div class="large-6 columns">
+    <%= image_tag @team.stadium_chart.url %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-4 columns" id="roster">
+    <h5>Roster</h5>
+    <% @team_players.each do |player| %>
+      <li><%= link_to player.name, team_player_path(@team, player) %></li>
+    <% end %>
+    <%= link_to 'Add Player', new_team_player_path(@team) %>
+  </div>
+
+  <div class="large-4 columns end" id="lineup">
+
+    <ul id="sortable-lineup" class="connectedSortable">
+    <!-- <li class="ui-state-disabled header">Lineup</li> -->
+    <% (1..9).each do |spot| %>
+      <li class="lineup-spot">
+        <% if @lineup[spot - 1] != nil %>
+          <%= Player.find(@lineup[spot - 1]).name %>
+        <% end %>
+      </li>
+    <% end %>
+    </ul>
+
+    <ul id="sortable-bench" class="connectedSortable">
+    <li class="ui-state-disabled header">Bench</li>
+    <% @bench_players.each do |player| %>
+      <li class="lineup-spot"><%= player.name %></li>
+    <% end %>
+    </ul>
+  </div>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+
+    $('#sortable-lineup, #sortable-bench').sortable({
+      cancel: '.ui-state-disabled',
+      connectWith: '.connectedSortable',
+      stop: function(e,ui){
+        if ($('#sortable-lineup .lineup-spot').length > 9) {
+          $('#sortable-lineup .lineup-spot').last().insertAfter('#sortable-bench .header');
+        } else if ($('#sortable-lineup .lineup-spot').length < 9) {
+          $('#sortable-bench .lineup-spot').first().appendTo('#sortable-lineup');
+        }
+      }
+    });
+
+    $('#sortable-lineup, #sortable-bench').disableSelection();
+
+
+  });
+
+</script>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508212531) do
+ActiveRecord::Schema.define(version: 20140509154902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,23 @@ ActiveRecord::Schema.define(version: 20140508212531) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "team_id"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.string   "lineup",                     default: [], array: true
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "stadium_chart_file_name"
+    t.string   "stadium_chart_content_type"
+    t.integer  "stadium_chart_file_size"
+    t.datetime "stadium_chart_updated_at"
   end
 
 end
