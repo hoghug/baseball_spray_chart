@@ -9,6 +9,15 @@ class PlayersController < ApplicationController
     @hit = Hit.new
     @hit_types = HitType.all
     @hits = @player.hits
+
+    @at_bats = Hit.where(player_id: @player.id)
+    @hits = @at_bats.reject {|x| x.hit_type_id == 1}
+    @outs = Hit.where(hit_type_id: 1, player_id: @player.id).length
+    @singles = Hit.where(hit_type_id: 2, player_id: @player.id).length
+    @doubles = Hit.where(hit_type_id: 3, player_id: @player.id).length
+    @triples = Hit.where(hit_type_id: 4, player_id: @player.id).length
+    @homeruns = Hit.where(hit_type_id: 5, player_id: @player.id).length
+
   end
 
   def new

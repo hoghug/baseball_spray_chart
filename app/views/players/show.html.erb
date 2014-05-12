@@ -12,6 +12,23 @@
     <h1><%= @player.name %></h1>
   </div>
 </div>
+
+<div class="row">
+  <table class="stats-table">
+    <tr><th>AB</th><th>H</th><th>BA</th><th>SLG</th><th>1B</th><th>2B</th><th>3B</th><th>HR</th></tr>
+    <tr>
+      <td><%= @at_bats.length %></td>
+      <td><%= @hits.length %></td>
+      <td><%= @player.batting_average(@hits.length, @at_bats.length) %></td>
+      <td><%= @player.slugging(@singles, @doubles, @triples, @homeruns, @at_bats.length) %></td>
+      <td><%= @singles %></td>
+      <td><%= @doubles %></td>
+      <td><%= @triples %></td>
+      <td><%= @homeruns %></td>
+    </tr>
+  </table>
+</div>
+
 <div class="row">
   <div class="large-12 columns">
     <div id="legend">
@@ -21,6 +38,14 @@
           <li class="hit-type <%= hit_type.name %>" data-hit-type-id="<%= hit_type.id %>"><%= hit_type.name %></li>
         <% end %>
       </ul>
+      <select id="chart-filter">
+        <option selected value="all">Show All</option>
+        <option value="single">Singles</option>
+        <option value="double">Doubles</option>
+        <option value="triple">Triples</option>
+        <option value="homerun">Homeruns</option>
+        <option value="out">Outs</option>
+      </select>
     </div>
     <div id="spray-chart">
       <% @hits.each do |hit| %>
@@ -37,6 +62,17 @@
 
 <script>
   $(document).ready(function(){
+
+    $('#chart-filter').change(function(){
+      selectedFilter = $('#chart-filter').val();
+
+      $('.hit-circle').each(function(index, value) {
+        $(this).hide();
+        if ($(this).hasClass(selectedFilter) || selectedFilter == 'all') {
+          $(this).show();
+        }
+      });
+    });
 
     $('.hit-type').on('click', function() {
       $('#hidden-hit_type_id').val($(this).data('hit-type-id'));

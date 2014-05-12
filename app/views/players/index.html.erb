@@ -1,4 +1,4 @@
 <ul><% @players.each do |player| %>
-  <li><%= link_to player.name, player_path(player) %></li>
+  <li><%= link_to player.name, team_player_path(player.team, player) %></li>
 <% end %>
 </ul>
